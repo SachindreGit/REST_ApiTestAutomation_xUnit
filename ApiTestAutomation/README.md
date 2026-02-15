@@ -16,6 +16,7 @@ appsettings.json is used by default for execution.
 
 'Dto' - folder contains DTOs used for communications with REST API endpoint.
 
+'DtoConverter\UnixTimestampConverter.cs' - converts UNIX timestamp in milliseconds to DateTime and vice versa.
 
 ## Tech Stack
 - .NET 10
@@ -27,8 +28,4 @@ dotnet test
 
 
 
-{"id":"ff8081819c5368bb019c5f45b67f1093","name":"123","createdAt":1771124930175,"data":{"year":"ssss","price":"s","cpuModel":1,"hardDiskSize":3}}
-
-
-Parallel execution is configured using xunit.runner.json
 
