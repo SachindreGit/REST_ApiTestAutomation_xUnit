@@ -1,10 +1,6 @@
-﻿using Xunit;
-using FluentAssertions;
+﻿using FluentAssertions;
 using RestSharp;
 using System.Net;
-using System.Text.Json;
-
-[assembly: CollectionBehavior(DisableTestParallelization = false, MaxParallelThreads = 4)]
 
 [Collection("Device Negative Tests")]
 public class DeviceNegativeTests : IClassFixture<ApiFixture>

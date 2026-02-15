@@ -1,5 +1,4 @@
-﻿using Xunit;
-using FluentAssertions;
+﻿using FluentAssertions;
 using RestSharp;
 using System.Net;
 using System.Text.Json;

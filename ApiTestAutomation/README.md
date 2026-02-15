@@ -24,7 +24,7 @@ appsettings.json is used by default for execution.
 
 ## Running Tests
 ```bash
-dotnet test
+dotnet test --logger "xunit;LogFilePath=TestResults/results.xml"
 
 
 
