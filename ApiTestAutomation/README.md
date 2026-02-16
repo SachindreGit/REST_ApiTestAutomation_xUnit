@@ -18,6 +18,8 @@ appsettings.json is used by default for execution.
 
 'DtoConverter\UnixTimestampConverter.cs' - converts UNIX timestamp in milliseconds to DateTime and vice versa.
 
+'Schemas\device.schema.json' - used to execute JSON schema validation test case.
+
 ## Tech Stack
 - .NET 10
 - xUnit 2.9.3
@@ -25,7 +27,7 @@ appsettings.json is used by default for execution.
 ## Running Tests
 ```bash
 dotnet test --logger "xunit;LogFilePath=TestResults/results.xml"
-
+```
 
 
 
