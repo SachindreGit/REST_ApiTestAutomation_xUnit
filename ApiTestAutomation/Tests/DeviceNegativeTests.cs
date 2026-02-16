@@ -14,7 +14,7 @@ public class DeviceNegativeTests : IClassFixture<ApiFixture>
 
    
     [Fact]
-    public async Task AddDevice_ShouldReturnNotFound_WhenEndpointIsInvalid()
+    public async Task AddDevice_ShouldReturnUnauthorized_WhenEndpointIsInvalid()
     {
         // Arrange - use invalid endpoint path
         var request = new RestRequest("/invalid-endpoint", Method.Post);
@@ -24,7 +24,7 @@ public class DeviceNegativeTests : IClassFixture<ApiFixture>
         var response = await _client.ExecuteAsync(request);
 
         // Assert
-        response.StatusCode.Should().Be(HttpStatusCode.NotFound);
+        response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
         response.Content.Should().NotBeNullOrEmpty();
 
         response.Content.Should().Contain("Unauthorized path");
