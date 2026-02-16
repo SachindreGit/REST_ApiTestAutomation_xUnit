@@ -72,4 +72,6 @@ public class DeviceNegativeTests : IClassFixture<ApiFixture>
         response.Content.Should().NotBeNullOrEmpty();
     }
 
+    
+
 }

@@ -2,7 +2,7 @@
 using RestSharp;
 using System.Net;
 using System.Text.Json;
-
+using NJsonSchema;
 
 [Collection("Device Positive Tests")]
 public class DevicePositiveTests : IClassFixture<ApiFixture>
@@ -177,6 +177,30 @@ public class DevicePositiveTests : IClassFixture<ApiFixture>
 
     }
    
+    [Fact]
+    public async Task GetDevice_ShouldMatch_JsonSchema()
+    {
+        // Arrange
+        var deviceId = 7;
+        var request = new RestRequest($"/objects/{deviceId}", Method.Get);
 
+        // Act
+        var response = await _client.ExecuteAsync(request);
+
+        // Assert HTTP
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        Assert.NotNull(response.Content);
+
+        // Load schema
+        var schemaPath = Path.Combine(AppContext.BaseDirectory, "Schemas", "device.schema.json");
+        var schemaJson = await File.ReadAllTextAsync(schemaPath);
+        var schema = await JsonSchema.FromJsonAsync(schemaJson);
+
+        // Validate
+        var errors = schema.Validate(response.Content);
+
+        Assert.True(errors.Count == 0,
+            $"Schema validation failed: {string.Join(", ", errors)}");
+    }
 
 }

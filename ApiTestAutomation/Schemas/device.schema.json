@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["id", "name", "data"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[0-9]+$",
+      "description": "Device identifier as numeric string"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "data": {
+      "type": "object",
+      "required": ["year", "price", "CPU model", "Hard disk size"],
+      "additionalProperties": false,
+      "properties": {
+        "year": {
+          "type": "integer",
+          "minimum": 1900
+        },
+        "price": {
+          "type": "number",
+          "minimum": 0
+        },
+        "CPU model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "Hard disk size": {
+          "type": "string",
+          "pattern": "^[0-9]+\\s?(GB|TB)$"
+        }
+      }
+    }
+  }
+}
