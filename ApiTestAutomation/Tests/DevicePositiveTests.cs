@@ -5,13 +5,11 @@ using System.Text.Json;
 using NJsonSchema;
 
 [Collection("Device Positive Tests")]
-public class DevicePositiveTests : IClassFixture<ApiFixture>
+public class DevicePositiveTests : TestBase
 {
-    private readonly RestClient _client;
-
-    public DevicePositiveTests(ApiFixture fixture)
+    public DevicePositiveTests(ApiFixture fixture): base(fixture)
     {
-        _client = fixture.Client;
+        // No implementation needed here as the base class constructor will handle the RestClient initialization
     }
 
     private async Task<Device> CreateDeviceAsync(Device deviceData)
@@ -25,7 +23,8 @@ public class DevicePositiveTests : IClassFixture<ApiFixture>
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         response.Content.Should().NotBeNullOrEmpty();
 
-        return JsonSerializer.Deserialize<Device>(response.Content);
+        return JsonSerializer.Deserialize<Device>(response.Content) 
+        ?? throw new Exception("Failed to deserialize response content.");
     }
 
     [Fact]

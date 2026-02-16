@@ -3,13 +3,12 @@ using RestSharp;
 using System.Net;
 
 [Collection("Device Negative Tests")]
-public class DeviceNegativeTests : IClassFixture<ApiFixture>
+public class DeviceNegativeTests : TestBase
 {
-    private readonly RestClient _client;
 
-    public DeviceNegativeTests(ApiFixture fixture)
+    public DeviceNegativeTests(ApiFixture fixture): base(fixture)
     {
-        _client = fixture.Client;
+        // No implementation needed here as the base class constructor will handle the RestClient initialization
     }
 
    
