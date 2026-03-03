@@ -8,13 +8,17 @@ public class ConfigurationFile
     public int TimeoutSeconds { get; }
 
     public ConfigurationFile()
-    {
-        var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production";
+    {  
+        
+        var configBuilder = new ConfigurationBuilder()
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
-        var configuration = new ConfigurationBuilder()
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-            .AddJsonFile($"appsettings.{environmentName}.json", optional: true)
-            .Build();
+        var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");        
+        if(environmentName != null)
+        {
+            configBuilder.AddJsonFile($"appsettings.{environmentName}.json", optional: true);
+        }
+        var configuration = configBuilder.Build();
 
         var section = configuration.GetSection("ApiSettings");
 

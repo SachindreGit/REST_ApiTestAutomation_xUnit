@@ -4,6 +4,7 @@ using System.Text.Json.Serialization;
 
 public class UnixTimestampConverter : JsonConverter<DateTime>
 {
+
     public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         if (reader.TokenType != JsonTokenType.Number)
@@ -12,6 +13,7 @@ public class UnixTimestampConverter : JsonConverter<DateTime>
         long unixTimestampMs = reader.GetInt64();
         return DateTime.UnixEpoch.AddMilliseconds(unixTimestampMs);
     }
+
 
     public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
     {
